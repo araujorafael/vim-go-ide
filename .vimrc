@@ -32,6 +32,10 @@ set undodir=$HOME/.VIM_UNDO_FILES
 
 set undolevels=5000
 
+"============================================================================
+" Set up mouse intaraction 
+"============================================================================
+set mouse=a
 
 "============================================================================
 " When completing, show all options, insert common prefix, then iterate
@@ -82,10 +86,13 @@ let g:ctrlp_cmd = 'CtrlP'
 "autocmd BufNewFile,BufRead *.go set number
 
 " Set tabs in go to equivalent of 4 spaces (instead of 8)
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.go setlocal tabstop=4 shiftwidth=4 expandtab 
 
 " GoImports will run on Save
 let g:go_fmt_command="goimports"
+
+" It will run gofmt on your file after you save it, but it doesn't refresh the buffer so you won't see your code suddenly change while your coding (if you want to refresh just do :e)
+au BufWritePost *.go !gofmt -w %
 
 " Common Go commands
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -112,9 +119,9 @@ endfunction
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " Enabling GoMetaLinter on save
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_metalinter_deadline = "5s"
+"let g:go_metalinter_autosave = 1
+"let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+"let g:go_metalinter_deadline = "5s"
 
 "============================================================================
 " Enable neosnippet
@@ -150,3 +157,8 @@ nnoremap <F4> :NumbersOnOff<CR>
 " NERDTree plugin
 "============================================================================
 map <F5> :NERDTreeToggle<CR>
+
+"============================================================================
+" Set Binary
+"============================================================================
+set binary
