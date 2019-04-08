@@ -1,4 +1,27 @@
 "============================================================================
+" Custom mappings 
+"============================================================================
+" Toggle moue mode
+nnoremap <F2> :call ToggleMouse()<CR> 
+
+function! ToggleMouse()
+    " check if mouse is enabled
+    if &mouse == 'a'
+        " disable mouse
+        set mouse=
+    else
+        " enable mouse everywhere
+        set mouse=a
+    endif
+endfunc
+
+" Navigate previous next buffer
+map <F7> :bprevious<CR>
+
+" Navigate to next
+map <F8> :bNext<CR>
+
+"============================================================================
 " Enable Pathogen (Easy plugin manager)
 "============================================================================
 execute pathogen#infect()
@@ -31,11 +54,6 @@ endif
 set undodir=$HOME/.VIM_UNDO_FILES
 
 set undolevels=5000
-
-"============================================================================
-" Set up mouse intaraction 
-"============================================================================
-set mouse=a
 
 "============================================================================
 " When completing, show all options, insert common prefix, then iterate
@@ -119,9 +137,9 @@ endfunction
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " Enabling GoMetaLinter on save
-"let g:go_metalinter_autosave = 1
-"let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-"let g:go_metalinter_deadline = "5s"
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_deadline = "5s"
 
 "============================================================================
 " Enable neosnippet
@@ -162,3 +180,4 @@ map <F5> :NERDTreeToggle<CR>
 " Set Binary
 "============================================================================
 set binary
+
